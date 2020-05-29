@@ -5,13 +5,25 @@ import { Link } from 'react-router';
 import query from '../queries/fetchSongs';
 class SongList extends React.Component {
   
+  onSongDelete(id) {
+    this.props.mutate({
+      variables: {
+        id: id
+      },
+      refetchQueries: [{ query: query }]
+    })
+  }
+
   renderSongs() {
     return this.props.data.songs.map(song => {
-      return(
+      return (
         <li key={song.id} className="collection-item">
           {song.title}
+          <i className="material-icons" onClick={() => this.onSongDelete(song.id)}>
+            delete
+          </i>
         </li>
-      )
+      );
     })
   }
 

@@ -3,11 +3,19 @@ import { graphql } from 'react-apollo';
 import fetchSong from '../queries/fetchSong';
 
 class SongDetail extends React.Component {
+  
   render() {
-    console.log(this.props);
+
+    // alternative way, also it can be possible to monitor de loading property like in the other component
+    const { song } = this.props.data;
+
+    if (!song) {
+      return <div>Loading...</div>
+    }
+
     return(
       <div>
-        <h3>Song Detail</h3>
+        <h3>{song.title}</h3>
       </div>
     )
   }
